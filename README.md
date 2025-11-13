@@ -2,7 +2,7 @@
 
 This project implements the Paligemma (Polygama) Visual Language Model (VLM), originally developed by Google, entirely from scratch in PyTorch. The methodology emphasizes coding every component, from tensor operations to complex architectural features, to ensure deep learning and comprehension.
 
-> "Write [the code] line by line, character by character, because that's the best way to learn."
+<img width="1276" height="726" alt="Screenshot (68)" src="https://github.com/user-attachments/assets/199cead6-b8c2-45b1-a30b-4b936f01b7ae" />
 
 ---
 
@@ -34,6 +34,8 @@ The implementation incorporates several modern techniques crucial for the effici
 
 ### 3.1. Contrastive Vision Encoder (SigLIP)
 The Vision Encoder uses Sigmoid Loss instead of the traditional Cross-Entropy Loss (found in CLIP).
+
+<img width="777" height="415" alt="image" src="https://github.com/user-attachments/assets/9af4f2bd-02a2-422d-b40f-401495f395fd" />
 
 * **Rationale:** Sigmoid Loss treats each dot product between an image embedding and a text embedding as an independent binary classification task (positive or negative match).
 * **Advantage:** This eliminates the need to compute the normalization constant (softmax) across entire rows or columns of the attention matrix, making the computation easier to parallelize and enabling the use of much larger batch sizes during training (up to millions of items). The goal is to produce image embeddings that are highly compatible with text embeddings for VLM use.
@@ -94,3 +96,7 @@ The `inference.py` script manages the generation process, which uses parameters 
 * **Top-P Sampling:** If sampling is enabled, the model sorts all tokens by probability and restricts the selection pool to the top tokens whose cumulative probability sum reaches the threshold *P* (e.g., 0.9).
 * **Temperature:** Applied to the logits before softmax, the temperature parameter adjusts the probability distribution. A lower temperature (closer to 0) makes the distribution sharper (favoring high-confidence tokens), while a higher temperature smooths the distribution, encouraging the selection of more diverse tokens.
 * **Weight Tying:** The weights of the initial embedding layer are shared with the final language modeling head (logits projection) to reduce the total number of parameters.
+
+* **Execution:** The inference script is run using the command-line arguments, supplying the necessary paths and hyper-parameters.
+  
+<img width="1537" height="802" alt="Screenshot (69)" src="https://github.com/user-attachments/assets/ed28c9d6-88b3-42c8-b483-8842475b9e78" />
